@@ -1,0 +1,15 @@
+{
+    "name": "dbashyal/Magento_Breadcrumbs",
+    "license": "OSL-3.0",
+    "type": "magento-module",
+    "description": "Magento Breadcrumbs Force Display Category Path",
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*"
+    },
+    "authors":[
+        {
+            "name":"Damodar Bashyal",
+            "email":""
+        }
+    ]
+}

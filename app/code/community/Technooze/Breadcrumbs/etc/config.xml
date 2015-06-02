@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+* @category   Technooze/Modules/Magento_Breadcrumbs
+* @package    Technooze_Breadcrumbs
+* @author     Damodar Bashyal (http://dltr.org/)
+* @author     Chris Pook (http://j.mp/1FQTjVz)
+* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*/
+-->
+<config>
+    <modules>
+        <Technooze_Breadcrumbs>
+            <version>0.1.0</version>
+        </Technooze_Breadcrumbs>
+    </modules>
+    <global>
+        <models>
+            <tbreadcrumbs>
+                <class>Technooze_Breadcrumbs_Model</class>
+            </tbreadcrumbs>
+        </models>
+        <helpers>
+            <tbreadcrumbs>
+                <class>Technooze_Breadcrumbs_Helper</class>
+            </tbreadcrumbs>
+        </helpers>
+    </global>
+	<frontend>
+		<events>
+			<catalog_controller_product_init_after>
+				<observers>
+					<add_category_breadcrumb>
+						<class>tbreadcrumbs/observer</class>
+						<method>addCategoryBreadcrumb</method>
+					</add_category_breadcrumb>
+				</observers>
+			</catalog_controller_product_init_after>
+		</events>
+	</frontend>
+</config>
