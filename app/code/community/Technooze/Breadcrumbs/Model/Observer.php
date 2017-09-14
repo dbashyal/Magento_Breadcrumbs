@@ -52,38 +52,7 @@ class Technooze_Breadcrumbs_Model_Observer
 	{
         /* @var $product Mage_Catalog_Model_Product */
         $product = $observer->getProduct();
-        $isSchoolWear = $product->getIsSchoolWear(); // Modify this as your need.
-        $category = Mage::registry('current_category');
-
-		if (!$category || $isSchoolWear) {
-		    if($category && $category->getId()){
-                $pathIds = $category->getPathIds();
-
-                if(count($pathIds) >= 4){ // for me minimum depth required is 4 for a school category page.
-                    return $this;
-                }
-            }
-			$categoryIds = $product->getCategoryIds();
-
-			if(count($categoryIds)) {
-                /* @var $collection Mage_Catalog_Model_Resource_Product_Collection */
-                $collection = Mage::getModel('catalog/category')->getCollection();
-				$collection->addAttributeToSelect('name');
-				$collection->addAttributeToFilter('is_active', array('eq'=>'1'));
-				$collection->addAttributeToFilter('entity_id', array('in' => $categoryIds));
-				$collection->addAttributeToSort('level', 'desc');
-				$collection->setPageSize(1);
-
-                /* @var $category Mage_Catalog_Model_Category */
-                $category = $collection->getFirstItem();
-
-                if ($category->getId()) {
-					$product->setCategory($category);
-					Mage::unregister('current_category'); // unregister existing category
-					Mage::register('current_category', $category);
-				}
-			}
-		}
+        Mage::helper('tbreadcrumbs')->getCurrentCategory($product);
 
 		return $this;
 	}
